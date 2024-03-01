@@ -27,12 +27,10 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
   void getProfile() async {
     try {
       final data = await supabase.from('profiles').select('*').single();
-      print(data);
       setState(() {
         profile = data;
       });
     } on PostgrestException catch (error) {
-      print(error);
       SnackBar(
         content: Text(error.message),
         backgroundColor: Theme.of(context).colorScheme.error,
@@ -63,7 +61,6 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                   ref.watch(authRepositoryProvider).signOut();
                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
                 },
-                // onTap: () => print("sa"),
                 child: const Text("LOGOUT"),
               ),
             ),

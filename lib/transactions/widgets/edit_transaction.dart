@@ -175,7 +175,6 @@ class _EditTransactionState extends ConsumerState<EditTransaction> {
                                 datetime: DateTime.now().toIso8601String()))
                       }
                   }),
-              // onPressed: () => {print(()},
               child: Text(
                 "Add transaction",
                 style: TextStyle(color: Theme.of(context).colorScheme.secondary),

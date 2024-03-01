@@ -23,14 +23,11 @@ class AuthRepository {
 
   Future<AuthModel> signIn({required String email, required String password}) async {
     try {
-      print(email);
-      print(password);
       AuthModel authModel = AuthModel(email: '', password: '', userId: '');
       final response = await _supabase.client.auth.signInWithPassword(email: email, password: password);
       authModel = AuthModel(userId: response.user!.id, email: email, password: password);
       return authModel;
     } catch (e) {
-      print(e);
       throw 'Error';
     }
   }
