@@ -1,0 +1,50 @@
+name: frugalistic
+description: "frugalistic App"
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.2
+  flutter_dotenv: ^5.1.0
+  supabase_flutter: ^2.0.0
+  persistent_bottom_nav_bar: ^5.0.2
+  intl: ^0.19.0
+  flutter_riverpod: ^2.4.10
+  riverpod_annotation: ^2.3.4
+  freezed: ^2.4.7
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.8.1
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+  riverpod_generator: ^2.3.11
+  build_runner: ^2.4.8
+  custom_lint: ^0.6.0
+  riverpod_lint: ^2.3.9
+  json_serializable: ^6.7.1
+  patrol: ^3.5.2
+
+flutter:
+  assets:
+    - .env
+
+  uses-material-design: true
+
+patrol:
+  app_name: frugalistic
+  android:
+    package_name: com.example.frugalistic
+  ios:
+    bundle_id: com.example.frugalistic
