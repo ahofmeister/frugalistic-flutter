@@ -35,8 +35,9 @@ class PageSelectorState extends State<PageSelector> {
         child: _pages.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        unselectedIconTheme: Theme.of(context).iconTheme,
-        selectedIconTheme: Theme.of(context).primaryIconTheme,
+        type: BottomNavigationBarType.fixed,
+        // unselectedIconTheme: Theme.of(context).iconTheme,
+        // selectedIconTheme: Theme.of(context).primaryIconTheme,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
