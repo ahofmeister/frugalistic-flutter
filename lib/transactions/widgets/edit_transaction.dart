@@ -118,14 +118,14 @@ class _EditTransactionState extends ConsumerState<EditTransaction> {
                 labelText: 'Description',
                 labelStyle: TextStyle(color: Theme.of(context).colorScheme.expense)),
           ),
-          SizedBox(
+          const SizedBox(
             height: 45,
           ),
           GestureDetector(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Cateogry"),
+                const Text("Cateogry"),
                 Text(currentCategory == null ? "-" : currentCategory!.name),
               ],
             ),
@@ -159,7 +159,7 @@ class _EditTransactionState extends ConsumerState<EditTransaction> {
                   isDismissible: false)
             },
           ),
-          SizedBox(
+          const SizedBox(
             height: 45,
           ),
           TextButton(
@@ -175,9 +175,9 @@ class _EditTransactionState extends ConsumerState<EditTransaction> {
                                 datetime: DateTime.now().toIso8601String()))
                       }
                   }),
-              child: Text(
+              child: const Text(
                 "Add transaction",
-                style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+                style: TextStyle(color: Colors.purple),
               ))
         ],
       ),

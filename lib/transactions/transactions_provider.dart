@@ -1,3 +1,4 @@
+import 'package:frugalistic/category/entity/category_division.dart';
 import 'package:frugalistic/transactions/entity/transaction.dart';
 import 'package:frugalistic/transactions/entity/TransactionType.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -68,4 +69,23 @@ Future<ExpenseIncomeTotal> totalExpenseAndIncomeAmount(TotalExpenseAndIncomeAmou
   });
 
   return result;
+}
+
+@riverpod
+Future<Map<CategoryDivision, int>> totalExpenseByDivision(TotalExpenseByDivisionRef ref) async {
+  List<Transaction> list = await ref.watch(transactionListProvider.future);
+
+  Map<CategoryDivision, int> totalExpensesByDivision = {
+    for (var division in CategoryDivision.values) division: 0
+  };
+
+  for (Transaction transaction in list) {
+    if (transaction.amount < 0) {
+      final CategoryDivision division = transaction.category.division;
+      totalExpensesByDivision[division] =
+          (totalExpensesByDivision[division] ?? 0) + transaction.amount;
+    }
+  }
+
+  return totalExpensesByDivision;
 }

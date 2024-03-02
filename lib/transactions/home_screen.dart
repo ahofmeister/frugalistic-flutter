@@ -16,18 +16,9 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    var transactions = ref.watch(transactionListProvider).value;
+    var transactions = ref.watch(transactionListProvider);
     var expenseSum = ref.watch(totalExpenseAndIncomeAmountProvider);
-
-    if (transactions == null || transactions.isEmpty) {
-      return const Text("No transactions");
-    }
 
     return Scaffold(
         body: SafeArea(
@@ -42,7 +33,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               GestureDetector(
                 child: Icon(
                   Icons.chevron_left,
-                  color: Theme.of(context).colorScheme.primary,
+                  color: Theme.of(context).colorScheme.onBackground,
                 ),
                 onTap: () => ref.watch(currentDateProvider.notifier).previous(),
               ),
@@ -53,37 +44,73 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ref.watch(currentDateProvider).format("MMMM"),
               ),
               const SizedBox(
-                width: 15,
+                width: 20,
               ),
               GestureDetector(
                 child: Icon(
                   Icons.chevron_right,
-                  color: Theme.of(context).colorScheme.primary,
+                  color: Theme.of(context).colorScheme.onBackground,
                 ),
                 onTap: () => ref.watch(currentDateProvider.notifier).next(),
               ),
             ],
           ),
-          Row(
-            children: [
-              Column(
-                children: [
-                  TransactionAmount(amount: expenseSum.requireValue.income),
-                  TransactionAmount(amount: expenseSum.requireValue.expense),
-                ],
-              ),
-
-            ],
-          ),
+          SizedBox(height: 25,),
+          const TransactionDivisions(),
+          if (!transactions.isLoading)
+            Row(
+              children: [
+                Column(
+                  children: [
+                    TransactionAmount(amount: expenseSum.requireValue.income),
+                    TransactionAmount(amount: expenseSum.requireValue.expense),
+                  ],
+                ),
+              ],
+            ),
           Flexible(
             child: ListView.separated(
               separatorBuilder: (context, index) => const SizedBox(height: 3),
-              itemCount: transactions!.length,
-              itemBuilder: (context, index) => TransactionCard(transaction: transactions[index]),
+              itemCount: transactions.value!.length,
+              itemBuilder: (context, index) =>
+                  TransactionCard(transaction: transactions.value![index]),
             ),
           ),
         ],
       ),
     ));
+  }
+}
+
+class TransactionDivisions extends ConsumerWidget {
+  const TransactionDivisions({Key? key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    var divisions = ref.watch(totalExpenseByDivisionProvider);
+
+    switch (divisions) {
+      case AsyncData(:final value):
+        return Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: value.entries.map((entry) {
+                    final division = entry.key;
+                    final amount = entry.value;
+
+                    return Column(
+                      children: [Text(division.name), TransactionAmount(amount: amount)],
+                    );
+                  }).toList() ??
+                  [],
+            ),
+          ],
+        );
+      case AsyncError(:final error):
+        return Text('error: $error');
+      default:
+        return const Text('Loading');
+    }
   }
 }

@@ -24,6 +24,24 @@ final totalExpenseAndIncomeAmountProvider =
 
 typedef TotalExpenseAndIncomeAmountRef
     = AutoDisposeFutureProviderRef<ExpenseIncomeTotal>;
+String _$totalExpenseByDivisionHash() =>
+    r'd3177bcaba45fb7616202385d4bbc5c7a886378d';
+
+/// See also [totalExpenseByDivision].
+@ProviderFor(totalExpenseByDivision)
+final totalExpenseByDivisionProvider =
+    AutoDisposeFutureProvider<Map<CategoryDivision, int>>.internal(
+  totalExpenseByDivision,
+  name: r'totalExpenseByDivisionProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$totalExpenseByDivisionHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef TotalExpenseByDivisionRef
+    = AutoDisposeFutureProviderRef<Map<CategoryDivision, int>>;
 String _$currentDateHash() => r'6e5e3b2283f893e240d8599b33d1b55a5b87ceed';
 
 /// See also [CurrentDate].
