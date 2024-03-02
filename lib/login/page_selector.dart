@@ -36,8 +36,6 @@ class PageSelectorState extends State<PageSelector> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        // unselectedIconTheme: Theme.of(context).iconTheme,
-        // selectedIconTheme: Theme.of(context).primaryIconTheme,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -48,7 +46,7 @@ class PageSelectorState extends State<PageSelector> {
             label: 'New',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
+            icon: Icon(Icons.menu),
             label: 'Categories',
           ),
           BottomNavigationBarItem(

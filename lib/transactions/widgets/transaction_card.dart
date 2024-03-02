@@ -19,6 +19,28 @@ class TransactionCard extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
+            flex: 1,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    DateFormat("EEE").format(DateTime.parse(transaction.datetime)),
+                    textAlign: TextAlign.left,
+                  ),
+                  Text(
+                    DateFormat("dd. MMM").format(DateTime.parse(transaction.datetime)),
+                    textAlign: TextAlign.left,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          Expanded(
             flex: 2,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,13 +51,6 @@ class TransactionCard extends StatelessWidget {
                 ),
                 Text(transaction.category.name),
               ],
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(DateFormat("EEE, dd. MMM").format(DateTime.parse(transaction.datetime))),
             ),
           ),
           // Text(DateFormat.d().format(DateTime.parse(transaction.datetime))),

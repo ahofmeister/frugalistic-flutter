@@ -125,7 +125,7 @@ class _EditTransactionState extends ConsumerState<EditTransaction> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("Cateogry"),
+                const Text("Category"),
                 Text(currentCategory == null ? "-" : currentCategory!.name),
               ],
             ),
@@ -166,7 +166,7 @@ class _EditTransactionState extends ConsumerState<EditTransaction> {
               onPressed: (() => {
                     if (currentCategory != null)
                       {
-                        ref.watch(transactionListProvider.notifier).addTransaction(
+                        ref.watch(transactionsProvider.notifier).addTransaction(
                             type,
                             Transaction(
                                 description: descriptionController.text,

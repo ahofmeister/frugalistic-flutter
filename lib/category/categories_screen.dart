@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frugalistic/category/provider/categories_provider.dart';
+import 'package:frugalistic/string/string_extension.dart';
 
 import 'entity/category.dart';
 import 'entity/category_division.dart';
@@ -27,7 +28,7 @@ class CategoriesScreen extends ConsumerWidget {
               itemCount: categories.value!.length,
               itemBuilder: (context, index) => ListTile(
                 title: Text(categories.value![index].name),
-                subtitle: Text(categories.value![index].division.name),
+                subtitle: Text(categories.value![index].division.name.capitalize()),
                 onTap: () {
                   // Navigate to edit category screen
                   Navigator.of(context).push(

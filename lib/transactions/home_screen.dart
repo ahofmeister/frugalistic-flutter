@@ -1,24 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:frugalistic/string/string_extension.dart';
+import 'package:frugalistic/transactions/widgets/transaction_list.dart';
 
 import 'transactions_provider.dart';
 import 'widgets/transaction_amount.dart';
-import 'widgets/transaction_card.dart';
+import 'widgets/transaction_divisions.dart';
 
-class HomeScreen extends ConsumerStatefulWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() {
-    return _HomeScreenState();
-  }
-}
-
-class _HomeScreenState extends ConsumerState<HomeScreen> {
-  @override
-  Widget build(BuildContext context) {
-    var transactions = ref.watch(transactionListProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
     var expenseSum = ref.watch(totalExpenseAndIncomeAmountProvider);
 
     return Scaffold(
@@ -43,6 +35,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
               Text(
                 ref.watch(currentDateProvider).format("MMMM"),
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               const SizedBox(
                 width: 20,
@@ -59,80 +52,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           const SizedBox(
             height: 25,
           ),
-          if (!transactions.isLoading)
+          if (!expenseSum.isLoading)
             Column(
               children: [
+                TransactionAmount(
+                    amount: expenseSum.requireValue.expense + expenseSum.requireValue.income),
                 TransactionAmount(amount: expenseSum.requireValue.income),
                 TransactionAmount(amount: expenseSum.requireValue.expense),
-                TransactionAmount(amount: expenseSum.requireValue.expense + expenseSum.requireValue.income),
               ],
             ),
+          const SizedBox(height: 10,),
           const TransactionDivisions(),
-          Flexible(
-            child: ListView.separated(
-              separatorBuilder: (context, index) => Divider(
-                height: 0.5,
-                indent: 20,
-                endIndent: 20,
-                color: Colors.grey[800],
-              ),
-              itemCount: transactions.value!.length,
-              itemBuilder: (context, index) =>
-                  TransactionCard(transaction: transactions.value![index]),
-            ),
-          ),
+          const SizedBox(height: 10,),
+          const TransactionList(),
         ],
       ),
     ));
-  }
-}
-
-class TransactionDivisions extends ConsumerWidget {
-  const TransactionDivisions({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    var divisions = ref.watch(totalExpenseByDivisionProvider);
-
-    switch (divisions) {
-      case AsyncData(:final value):
-        return Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: value.entries.map((entry) {
-                final division = entry.key;
-                final amount = entry.value;
-
-                final isFirstItem = division == value.entries.first.key;
-                final isLastItem = division == value.entries.last.key;
-                var roundedBorderValue = 5.0;
-                return Container(
-                  padding: const EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(isFirstItem ? roundedBorderValue : 0),
-                      topRight: Radius.circular(isLastItem ? roundedBorderValue : 0),
-                      bottomLeft: Radius.circular(isFirstItem ? roundedBorderValue : 0),
-                      bottomRight: Radius.circular(isLastItem ? roundedBorderValue : 0),
-                    ),
-                    color: Colors.brown,
-                  ),
-                  child: Column(
-                    children: [
-                      TransactionAmount(amount: amount),
-                      Text(division.name.capitalize()),
-                    ],
-                  ),
-                );
-              }).toList(),
-            ),
-          ],
-        );
-      case AsyncError(:final error):
-        return Text('error: $error');
-      default:
-        return const Text('Loading');
-    }
   }
 }

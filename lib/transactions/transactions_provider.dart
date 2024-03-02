@@ -18,8 +18,8 @@ class CurrentDate extends _$CurrentDate {
   void next() => state = state.add(months: 1);
 }
 
-@riverpod
-class TransactionList extends _$TransactionList {
+@Riverpod(keepAlive: true)
+class Transactions extends _$Transactions {
   @override
   Future<List<Transaction>> build() async {
     var currentDate = ref.watch(currentDateProvider);
@@ -56,7 +56,7 @@ class ExpenseIncomeTotal {
 
 @riverpod
 Future<ExpenseIncomeTotal> totalExpenseAndIncomeAmount(TotalExpenseAndIncomeAmountRef ref) async {
-  List<Transaction> list = await ref.watch(transactionListProvider.future);
+  List<Transaction> list = await ref.watch(transactionsProvider.future);
 
   ExpenseIncomeTotal result =
       list.fold(ExpenseIncomeTotal(expense: 0, income: 0), (acc, transaction) {
@@ -73,7 +73,7 @@ Future<ExpenseIncomeTotal> totalExpenseAndIncomeAmount(TotalExpenseAndIncomeAmou
 
 @riverpod
 Future<Map<CategoryDivision, int>> totalExpenseByDivision(TotalExpenseByDivisionRef ref) async {
-  List<Transaction> list = await ref.watch(transactionListProvider.future);
+  List<Transaction> list = await ref.watch(transactionsProvider.future);
 
   Map<CategoryDivision, int> totalExpensesByDivision = {
     for (var division in CategoryDivision.values) division: 0

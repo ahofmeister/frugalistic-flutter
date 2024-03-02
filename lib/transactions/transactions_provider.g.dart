@@ -25,7 +25,7 @@ final totalExpenseAndIncomeAmountProvider =
 typedef TotalExpenseAndIncomeAmountRef
     = AutoDisposeFutureProviderRef<ExpenseIncomeTotal>;
 String _$totalExpenseByDivisionHash() =>
-    r'd3177bcaba45fb7616202385d4bbc5c7a886378d';
+    r'f7fb5a7e0ab56c5b8674de268d06f219399d1d58';
 
 /// See also [totalExpenseByDivision].
 @ProviderFor(totalExpenseByDivision)
@@ -57,21 +57,20 @@ final currentDateProvider =
 );
 
 typedef _$CurrentDate = AutoDisposeNotifier<Date>;
-String _$transactionListHash() => r'651016decb686a2a01c88070f0135bbc29fd3324';
+String _$transactionsHash() => r'1f2ba021ce0f1262be4c31c6d789128df9ad0984';
 
-/// See also [TransactionList].
-@ProviderFor(TransactionList)
-final transactionListProvider = AutoDisposeAsyncNotifierProvider<
-    TransactionList, List<Transaction>>.internal(
-  TransactionList.new,
-  name: r'transactionListProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$transactionListHash,
+/// See also [Transactions].
+@ProviderFor(Transactions)
+final transactionsProvider =
+    AutoDisposeAsyncNotifierProvider<Transactions, List<Transaction>>.internal(
+  Transactions.new,
+  name: r'transactionsProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$transactionsHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$TransactionList = AutoDisposeAsyncNotifier<List<Transaction>>;
+typedef _$Transactions = AutoDisposeAsyncNotifier<List<Transaction>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
