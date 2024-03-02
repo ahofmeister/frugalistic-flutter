@@ -5,7 +5,7 @@ import '../entity/category.dart';
 
 part 'categories_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class Categories extends _$Categories {
   @override
   Future<List<Category>> build() async {
@@ -17,13 +17,21 @@ class Categories extends _$Categories {
   }
 
   Future<void> editCategory(Category editedCategory) async {
-    var res = await Supabase.instance.client.from("categories").upsert({
-      "id": editedCategory.id,
+    final values = {
+      if (editedCategory.id != null) "id": editedCategory.id,
       "user_id": Supabase.instance.client.auth.currentUser!.id,
       "name": editedCategory.name,
-      "division": editedCategory.division.name
-    });
-    print(res);
+      "division": editedCategory.division.name,
+    };
+
+    await Supabase.instance.client.from("categories").upsert(values);
     ref.invalidateSelf();
+  }
+
+  Future<void> deleteCategory(Category category) async {
+    if (category.id != null) {
+      await Supabase.instance.client.from("categories").delete().eq("id", category.id.toString());
+      ref.invalidateSelf();
+    }
   }
 }

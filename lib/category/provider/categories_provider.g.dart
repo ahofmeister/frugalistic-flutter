@@ -6,12 +6,12 @@ part of 'categories_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$categoriesHash() => r'637e6f057b59a389a29105a1e54d159eb1e15788';
+String _$categoriesHash() => r'169854fd4398fad02922e64275a69c8fc0c5b40b';
 
 /// See also [Categories].
 @ProviderFor(Categories)
 final categoriesProvider =
-    AutoDisposeAsyncNotifierProvider<Categories, List<Category>>.internal(
+    AsyncNotifierProvider<Categories, List<Category>>.internal(
   Categories.new,
   name: r'categoriesProvider',
   debugGetCreateSourceHash:
@@ -20,6 +20,6 @@ final categoriesProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$Categories = AutoDisposeAsyncNotifier<List<Category>>;
+typedef _$Categories = AsyncNotifier<List<Category>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

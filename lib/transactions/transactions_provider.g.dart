@@ -39,7 +39,7 @@ final currentDateProvider =
 );
 
 typedef _$CurrentDate = AutoDisposeNotifier<Date>;
-String _$transactionListHash() => r'123966166e7a814169dc6b6afa2c7ac37e8ec986';
+String _$transactionListHash() => r'651016decb686a2a01c88070f0135bbc29fd3324';
 
 /// See also [TransactionList].
 @ProviderFor(TransactionList)

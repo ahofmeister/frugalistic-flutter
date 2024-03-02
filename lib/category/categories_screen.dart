@@ -1,9 +1,3 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
-//
-// import 'entity/category_division.dart';
-// import 'provider/categories_provider.dart';
-//
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frugalistic/category/provider/categories_provider.dart';
@@ -16,7 +10,11 @@ class CategoriesScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var watch = ref.watch(categoriesProvider).value!;
+    var categories = ref.watch(categoriesProvider);
+
+    if (categories.isLoading) {
+      return Text("Loading");
+    }
 
     return Scaffold(
       body: Column(
@@ -26,18 +24,25 @@ class CategoriesScreen extends ConsumerWidget {
               separatorBuilder: (context, index) => const SizedBox(
                 height: 5,
               ),
-              itemCount: watch.length,
+              itemCount: categories.value!.length,
               itemBuilder: (context, index) => ListTile(
-                title: Text(watch[index].name),
-                subtitle: Text(watch[index].division.name),
+                title: Text(categories.value![index].name),
+                subtitle: Text(categories.value![index].division.name),
                 onTap: () {
                   // Navigate to edit category screen
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => EditCategoryScreen(category: watch[index]),
+                      builder: (context) => EditCategoryScreen(category: categories.value![index]),
                     ),
                   );
                 },
+                trailing: IconButton(
+                  icon: Icon(Icons.delete),
+                  onPressed: () {
+                    // Delete the category from the provider
+                    ref.watch(categoriesProvider.notifier).deleteCategory(categories.value![index]);
+                  },
+                ),
               ),
             ),
           ),
@@ -57,6 +62,7 @@ class CategoriesScreen extends ConsumerWidget {
     );
   }
 }
+
 
 class AddCategoryScreen extends ConsumerWidget {
   final TextEditingController nameController = TextEditingController();
