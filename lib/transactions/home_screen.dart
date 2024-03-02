@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frugalistic/string/string_extension.dart';
 
 import 'transactions_provider.dart';
 import 'widgets/transaction_amount.dart';
@@ -118,7 +119,7 @@ class TransactionDivisions extends ConsumerWidget {
                   child: Column(
                     children: [
                       TransactionAmount(amount: amount),
-                      Text(division.name),
+                      Text(division.name.capitalize()),
                     ],
                   ),
                 );
