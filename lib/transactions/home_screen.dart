@@ -55,7 +55,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
             ],
           ),
-          SizedBox(height: 25,),
+          const SizedBox(
+            height: 25,
+          ),
           const TransactionDivisions(),
           if (!transactions.isLoading)
             Row(
@@ -83,7 +85,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 }
 
 class TransactionDivisions extends ConsumerWidget {
-  const TransactionDivisions({Key? key});
+  const TransactionDivisions({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -94,16 +96,33 @@ class TransactionDivisions extends ConsumerWidget {
         return Column(
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: value.entries.map((entry) {
-                    final division = entry.key;
-                    final amount = entry.value;
+                final division = entry.key;
+                final amount = entry.value;
 
-                    return Column(
-                      children: [Text(division.name), TransactionAmount(amount: amount)],
-                    );
-                  }).toList() ??
-                  [],
+                final isFirstItem = division == value.entries.first.key;
+                final isLastItem = division == value.entries.last.key;
+                var roundedBorderValue = 5.0;
+                return Container(
+                  padding: const EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(isFirstItem ? roundedBorderValue : 0),
+                      topRight: Radius.circular(isLastItem ? roundedBorderValue : 0),
+                      bottomLeft: Radius.circular(isFirstItem ? roundedBorderValue : 0),
+                      bottomRight: Radius.circular(isLastItem ? roundedBorderValue : 0),
+                    ),
+                    color: Colors.brown,
+                  ),
+                  child: Column(
+                    children: [
+                      TransactionAmount(amount: amount),
+                      Text(division.name),
+                    ],
+                  ),
+                );
+              }).toList(),
             ),
           ],
         );
