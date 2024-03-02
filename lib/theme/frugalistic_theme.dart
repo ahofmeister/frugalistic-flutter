@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 final ThemeData frugalisticTheme = ThemeData.dark().copyWith(
   colorScheme: const ColorScheme.dark(
-    primary: Color(0xFFC74200),
-    secondary: Color(0xFFC74200),
+    primary: Color(0x00C74200),
+    secondary: Color(0x00C74200),
     background: Color(0xFF101112),
     onBackground: Colors.white,
   ),
@@ -23,18 +23,20 @@ final ThemeData frugalisticTheme = ThemeData.dark().copyWith(
       ),
     ),
   ),
-  appBarTheme: const AppBarTheme(
-    color: Color(0x00C74200),
-    elevation: 0, // No shadow
-    iconTheme: IconThemeData(color: Colors.white),
+  appBarTheme:  AppBarTheme(
+    // color: Color(0xFFC74200),
+    backgroundColor: Colors.red,
+    iconTheme: IconThemeData(color: Colors.red),
   ),
-  scaffoldBackgroundColor: Color(0xFF101112), // Set the background color to neutral
-  // Add additional customizations as needed
+  scaffoldBackgroundColor: Color(0xFF101112),
 );
 
 extension MyColorScheme on ColorScheme {
   Color get income => const Color(0xFF84F5F5);
+
   Color get expense => const Color(0xFFF58484);
+
   Color get primary => const Color(0xFFC74200);
+
   Color get neutral => const Color(0xFF101112);
 }

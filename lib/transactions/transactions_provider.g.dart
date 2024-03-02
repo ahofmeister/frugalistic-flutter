@@ -7,7 +7,7 @@ part of 'transactions_provider.dart';
 // **************************************************************************
 
 String _$totalExpenseAndIncomeAmountHash() =>
-    r'143c5ce9bd9c10a1eca1ff741a84ec3c4c87fae0';
+    r'eb5446edb959dbe9b1df18852656cc1fb22e81d5';
 
 /// See also [totalExpenseAndIncomeAmount].
 @ProviderFor(totalExpenseAndIncomeAmount)
@@ -24,7 +24,7 @@ final totalExpenseAndIncomeAmountProvider =
 
 typedef TotalExpenseAndIncomeAmountRef
     = AutoDisposeFutureProviderRef<ExpenseIncomeTotal>;
-String _$currentDateHash() => r'e17fe9183abd59dc5000846da70c00b15669d4fe';
+String _$currentDateHash() => r'6e5e3b2283f893e240d8599b33d1b55a5b87ceed';
 
 /// See also [CurrentDate].
 @ProviderFor(CurrentDate)
@@ -39,7 +39,7 @@ final currentDateProvider =
 );
 
 typedef _$CurrentDate = AutoDisposeNotifier<Date>;
-String _$transactionListHash() => r'9327a225d535fd272af732b6803c229659610bec';
+String _$transactionListHash() => r'123966166e7a814169dc6b6afa2c7ac37e8ec986';
 
 /// See also [TransactionList].
 @ProviderFor(TransactionList)

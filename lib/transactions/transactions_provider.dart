@@ -24,7 +24,7 @@ class TransactionList extends _$TransactionList {
     var currentDate = ref.watch(currentDateProvider);
     List<Map<String, dynamic>> response = await Supabase.instance.client
         .from("transactions")
-        .select("id, description, amount, datetime, category(id, name) ")
+        .select("id, description, amount, datetime, category(id, name, division) ")
         .gte('datetime', currentDate.firstOfMonth().toString())
         .lte('datetime', currentDate.lastOfMonth().toString())
         .order('datetime', ascending: false)

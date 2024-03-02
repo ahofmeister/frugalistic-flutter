@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frugalistic/theme/frugalistic_theme.dart';
 
-import '../../category/categories_provider.dart';
+import '../../category/provider/categories_provider.dart';
 import '../../category/entity/category.dart';
 import '../entity/TransactionType.dart';
 import '../entity/transaction.dart';

@@ -1,3 +1,4 @@
+import 'package:frugalistic/category/categories_screen.dart';
 import 'package:frugalistic/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -33,6 +34,7 @@ class MyApp extends ConsumerWidget {
         '/': (_) => const SplashPage(),
         '/login': (_) => const LoginScreen(),
         '/account': (_) => const PageSelector(),
+        '/categories': (_) => const CategoriesScreen(),
       },
     );
   }

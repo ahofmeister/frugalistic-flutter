@@ -22,6 +22,7 @@ Category _$CategoryFromJson(Map<String, dynamic> json) {
 mixin _$Category {
   int? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  CategoryDivision get division => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,7 @@ abstract class $CategoryCopyWith<$Res> {
   factory $CategoryCopyWith(Category value, $Res Function(Category) then) =
       _$CategoryCopyWithImpl<$Res, Category>;
   @useResult
-  $Res call({int? id, String name});
+  $Res call({int? id, String name, CategoryDivision division});
 }
 
 /// @nodoc
@@ -52,6 +53,7 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
   $Res call({
     Object? id = freezed,
     Object? name = null,
+    Object? division = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -62,6 +64,10 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      division: null == division
+          ? _value.division
+          : division // ignore: cast_nullable_to_non_nullable
+              as CategoryDivision,
     ) as $Val);
   }
 }
@@ -74,7 +80,7 @@ abstract class _$$CategoryImplCopyWith<$Res>
       __$$CategoryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, String name});
+  $Res call({int? id, String name, CategoryDivision division});
 }
 
 /// @nodoc
@@ -90,6 +96,7 @@ class __$$CategoryImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = null,
+    Object? division = null,
   }) {
     return _then(_$CategoryImpl(
       id: freezed == id
@@ -100,6 +107,10 @@ class __$$CategoryImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      division: null == division
+          ? _value.division
+          : division // ignore: cast_nullable_to_non_nullable
+              as CategoryDivision,
     ));
   }
 }
@@ -107,7 +118,7 @@ class __$$CategoryImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$CategoryImpl implements _Category {
-  _$CategoryImpl({this.id, required this.name});
+  _$CategoryImpl({this.id, required this.name, required this.division});
 
   factory _$CategoryImpl.fromJson(Map<String, dynamic> json) =>
       _$$CategoryImplFromJson(json);
@@ -116,10 +127,12 @@ class _$CategoryImpl implements _Category {
   final int? id;
   @override
   final String name;
+  @override
+  final CategoryDivision division;
 
   @override
   String toString() {
-    return 'Category(id: $id, name: $name)';
+    return 'Category(id: $id, name: $name, division: $division)';
   }
 
   @override
@@ -128,12 +141,14 @@ class _$CategoryImpl implements _Category {
         (other.runtimeType == runtimeType &&
             other is _$CategoryImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.division, division) ||
+                other.division == division));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(runtimeType, id, name, division);
 
   @JsonKey(ignore: true)
   @override
@@ -150,8 +165,10 @@ class _$CategoryImpl implements _Category {
 }
 
 abstract class _Category implements Category {
-  factory _Category({final int? id, required final String name}) =
-      _$CategoryImpl;
+  factory _Category(
+      {final int? id,
+      required final String name,
+      required final CategoryDivision division}) = _$CategoryImpl;
 
   factory _Category.fromJson(Map<String, dynamic> json) =
       _$CategoryImpl.fromJson;
@@ -160,6 +177,8 @@ abstract class _Category implements Category {
   int? get id;
   @override
   String get name;
+  @override
+  CategoryDivision get division;
   @override
   @JsonKey(ignore: true)
   _$$CategoryImplCopyWith<_$CategoryImpl> get copyWith =>

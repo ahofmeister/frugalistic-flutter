@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frugalistic/category/categories_screen.dart';
 
 import '../profile/profile_page.dart';
 import '../transactions/home_screen.dart';
@@ -17,6 +18,7 @@ class PageSelectorState extends State<PageSelector> {
   static const List<Widget> _pages = <Widget>[
     HomeScreen(),
     EditTransaction(),
+    CategoriesScreen(),
     ProfilePage(),
   ];
 
@@ -33,6 +35,8 @@ class PageSelectorState extends State<PageSelector> {
         child: _pages.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        unselectedIconTheme: Theme.of(context).iconTheme,
+        selectedIconTheme: Theme.of(context).primaryIconTheme,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -41,6 +45,10 @@ class PageSelectorState extends State<PageSelector> {
           BottomNavigationBarItem(
             icon: Icon(Icons.add),
             label: 'New',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
+            label: 'Categories',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_2),
