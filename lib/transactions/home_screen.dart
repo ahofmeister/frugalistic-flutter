@@ -73,7 +73,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
           Flexible(
             child: ListView.separated(
-              separatorBuilder: (context, index) => const SizedBox(height: 3),
+              separatorBuilder: (context, index) => Divider(
+                height: 0.5,
+                indent: 20,
+                endIndent: 20,
+                color: Colors.grey[800],
+              ),
               itemCount: transactions.value!.length,
               itemBuilder: (context, index) =>
                   TransactionCard(transaction: transactions.value![index]),

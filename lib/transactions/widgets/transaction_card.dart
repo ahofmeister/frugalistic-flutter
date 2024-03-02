@@ -1,7 +1,8 @@
-import 'package:frugalistic/transactions/entity/transaction.dart';
-import 'package:frugalistic/transactions/widgets/transaction_amount.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import '../entity/transaction.dart';
+import 'transaction_amount.dart';
 
 class TransactionCard extends StatelessWidget {
   const TransactionCard({
@@ -14,29 +15,37 @@ class TransactionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.grey.shade900,
-          ),
-          borderRadius: const BorderRadius.all(Radius.circular(10))),
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(15),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            children: [
-              Text(DateFormat.MMM().format(DateTime.parse(transaction.datetime))),
-              Text(DateFormat.d().format(DateTime.parse(transaction.datetime))),
-            ],
+          Expanded(
+            flex: 2,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  transaction.description,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(transaction.category.name),
+              ],
+            ),
           ),
-          Column(
-            children: [
-              Text(transaction.category.name),
-              Text(transaction.description),
-            ],
+          Expanded(
+            flex: 1,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(DateFormat("EEE, dd. MMM").format(DateTime.parse(transaction.datetime))),
+            ),
           ),
-          TransactionAmount(amount: (transaction.amount)),
+          // Text(DateFormat.d().format(DateTime.parse(transaction.datetime))),
+          Expanded(
+            flex: 1,
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: TransactionAmount(amount: transaction.amount),
+            ),
+          ),
         ],
       ),
     );
