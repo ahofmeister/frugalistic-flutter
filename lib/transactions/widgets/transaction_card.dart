@@ -32,7 +32,7 @@ class TransactionCard extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 1,
+            flex: 2,
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(DateFormat("EEE, dd. MMM").format(DateTime.parse(transaction.datetime))),

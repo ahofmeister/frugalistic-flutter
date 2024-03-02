@@ -59,18 +59,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           const SizedBox(
             height: 25,
           ),
-          const TransactionDivisions(),
           if (!transactions.isLoading)
-            Row(
+            Column(
               children: [
-                Column(
-                  children: [
-                    TransactionAmount(amount: expenseSum.requireValue.income),
-                    TransactionAmount(amount: expenseSum.requireValue.expense),
-                  ],
-                ),
+                TransactionAmount(amount: expenseSum.requireValue.income),
+                TransactionAmount(amount: expenseSum.requireValue.expense),
+                TransactionAmount(amount: expenseSum.requireValue.expense + expenseSum.requireValue.income),
               ],
             ),
+          const TransactionDivisions(),
           Flexible(
             child: ListView.separated(
               separatorBuilder: (context, index) => Divider(
