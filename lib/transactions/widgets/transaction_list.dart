@@ -22,7 +22,25 @@ class TransactionList extends ConsumerWidget {
               color: Colors.grey[800],
             ),
             itemCount: value.length,
-            itemBuilder: (context, index) => TransactionCard(transaction: value[index]),
+            itemBuilder: (context, index) => Dismissible(
+              key: Key(value[index].id.toString()),
+              direction: DismissDirection.endToStart,
+              background: Container(
+                alignment: AlignmentDirectional.centerEnd,
+                color: Colors.red,
+                child: const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Icon(
+                    Icons.delete,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              onDismissed: (direction) {
+                ref.read(transactionsProvider.notifier).removeTransaction(value[index]);
+              },
+              child: TransactionCard(transaction: value[index]),
+            ),
           ),
         );
       case AsyncError(:final error):

@@ -1,4 +1,5 @@
 import 'package:frugalistic/category/entity/category_division.dart';
+import 'package:frugalistic/main.dart';
 import 'package:frugalistic/transactions/entity/transaction.dart';
 import 'package:frugalistic/transactions/entity/TransactionType.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -44,6 +45,10 @@ class Transactions extends _$Transactions {
       "category": transaction.category.id
     });
     ref.invalidateSelf();
+  }
+
+  void removeTransaction(Transaction value) async {
+    await Supabase.instance.client.from("transactions").delete().eq("id", value.id!);
   }
 }
 
