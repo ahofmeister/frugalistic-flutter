@@ -162,23 +162,30 @@ class _EditTransactionState extends ConsumerState<EditTransaction> {
           const SizedBox(
             height: 45,
           ),
-          TextButton(
-              onPressed: (() => {
-                    if (currentCategory != null)
-                      {
-                        ref.watch(transactionsProvider.notifier).addTransaction(
-                            type,
-                            Transaction(
-                                description: descriptionController.text,
-                                amount: amountController.intValue,
-                                category: currentCategory!,
-                                datetime: DateTime.now().toIso8601String()))
-                      }
-                  }),
-              child: const Text(
-                "Add transaction",
-                style: TextStyle(color: Colors.purple),
-              ))
+          Expanded(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: SizedBox(
+                width: double.infinity,
+                child: TextButton(
+                    onPressed: (() => {
+                          if (currentCategory != null)
+                            {
+                              ref.watch(transactionsProvider.notifier).addTransaction(
+                                  type,
+                                  Transaction(
+                                      description: descriptionController.text,
+                                      amount: amountController.intValue,
+                                      category: currentCategory!,
+                                      datetime: DateTime.now().toIso8601String()))
+                            }
+                        }),
+                    child: const Text(
+                      "Add",
+                    )),
+              ),
+            ),
+          )
         ],
       ),
     );

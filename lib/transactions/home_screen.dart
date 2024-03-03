@@ -26,7 +26,7 @@ class HomeScreen extends ConsumerWidget {
               GestureDetector(
                 child: Icon(
                   Icons.chevron_left,
-                  color: Theme.of(context).colorScheme.onBackground,
+                  color: Colors.white,
                 ),
                 onTap: () => ref.watch(currentDateProvider.notifier).previous(),
               ),
@@ -35,7 +35,7 @@ class HomeScreen extends ConsumerWidget {
               ),
               Text(
                 ref.watch(currentDateProvider).format("MMMM"),
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
               ),
               const SizedBox(
                 width: 20,
@@ -61,9 +61,13 @@ class HomeScreen extends ConsumerWidget {
                 TransactionAmount(amount: expenseSum.requireValue.expense),
               ],
             ),
-          const SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           const TransactionDivisions(),
-          const SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           const TransactionList(),
         ],
       ),

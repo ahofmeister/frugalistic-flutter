@@ -5,14 +5,15 @@ import '../../transaction_utils.dart';
 
 class TransactionAmount extends StatelessWidget {
   final int amount;
+  final Color? color;
 
-  const TransactionAmount({super.key, required this.amount});
+  const TransactionAmount({super.key, required this.amount, this.color});
 
   @override
   Widget build(BuildContext context) {
     return Text(
       TransactionUtils.formatAmount(amount),
-      style: TextStyle(color: getColor(context, amount)),
+      style: TextStyle(color: color ?? getColor(context, amount)),
     );
   }
 
