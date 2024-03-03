@@ -34,7 +34,7 @@ dev_dependencies:
   custom_lint: ^0.6.0
   riverpod_lint: ^2.3.9
   json_serializable: ^6.7.1
-  patrol: ^3.5.2
+
 
 flutter:
   assets:

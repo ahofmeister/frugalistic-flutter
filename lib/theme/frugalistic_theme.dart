@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 
 final ThemeData frugalisticTheme = ThemeData.dark().copyWith(
   colorScheme: const ColorScheme.dark(
-    primary: Color(0x00C74200),
-    secondary: Color(0x00C74200),
+    primary: Color(0xFFF57D1F),
+    secondary: Color(0xFFC74200),
   ),
   appBarTheme: const AppBarTheme(foregroundColor: Colors.purpleAccent),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     backgroundColor: Colors.grey[900],
-    selectedItemColor: const Color(0xFFC74200),
-    unselectedItemColor: Colors.grey[500],
+    selectedItemColor: const Color(0xFFF57D1F),
+    unselectedItemColor: Colors.grey[400],
   ),
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF66396D)),
+        backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFFF57D1F)),
         foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),

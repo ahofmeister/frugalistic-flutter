@@ -22,6 +22,7 @@ class _EditTransactionState extends ConsumerState<EditTransaction> {
   var descriptionController = TextEditingController();
   var amountController = MoneyMaskedTextController();
   Category? currentCategory;
+  DateTime currentDateTime = DateTime.now();
 
   TransactionType type = TransactionType.expense;
 
@@ -93,7 +94,8 @@ class _EditTransactionState extends ConsumerState<EditTransaction> {
             height: 20,
           ),
           Center(
-            child: TextFormField(
+            child: TextField(
+              keyboardType: TextInputType.number,
               autofocus: true,
               textAlign: TextAlign.center,
               controller: amountController,
@@ -109,24 +111,68 @@ class _EditTransactionState extends ConsumerState<EditTransaction> {
                       : Theme.of(context).colorScheme.income),
             ),
           ),
-          const SizedBox(
-            height: 20,
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: GestureDetector(
+                  child: const Text(
+                    "Date",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                  onTap: () async {
+                    DateTime? pickedDate = await showDatePicker(
+                      initialDate: DateTime.now(),
+                      context: context,
+                      firstDate: DateTime.now().subtract(Duration(days: 10000)),
+                      lastDate: DateTime.now().add(Duration(days: 10000)),
+                    );
+
+                    if (pickedDate != null) {
+                      setState(() {
+                        currentDateTime = pickedDate;
+                      });
+                    }
+                  },
+                ),
+              ),
+               Text(currentDateTime.toIso8601String()),
+              const Icon(Icons.date_range)
+            ],
           ),
-          TextFormField(
-            controller: descriptionController,
-            decoration: InputDecoration(
-                labelText: 'Description',
-                labelStyle: TextStyle(color: Theme.of(context).colorScheme.expense)),
+          const SizedBox(height: 15),
+          const Divider(
+            height: 1,
+            thickness: 0.5,
           ),
           const SizedBox(
             height: 45,
           ),
+          TextFormField(
+            controller: descriptionController,
+            decoration: const InputDecoration.collapsed(
+              hintText: 'Description',
+              hintStyle: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          const SizedBox(height: 30),
+          const Divider(
+            height: 1,
+            thickness: 0.5,
+          ),
+          const SizedBox(height: 30),
           GestureDetector(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("Category"),
-                Text(currentCategory == null ? "-" : currentCategory!.name),
+                const Text(
+                  "Category",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                if (currentCategory == null) const Icon(Icons.grid_view),
+                if (currentCategory != null) Text(currentCategory!.name)
               ],
             ),
             onTap: () => {
@@ -177,7 +223,7 @@ class _EditTransactionState extends ConsumerState<EditTransaction> {
                                       description: descriptionController.text,
                                       amount: amountController.intValue,
                                       category: currentCategory!,
-                                      datetime: DateTime.now().toIso8601String()))
+                                      datetime: currentDateTime!.toIso8601String()))
                             }
                         }),
                     child: const Text(
