@@ -25,6 +25,6 @@ class TransactionAmount extends StatelessWidget {
       return Theme.of(context).colorScheme.income;
     }
 
-    return Theme.of(context).colorScheme.onPrimary;
+    return Theme.of(context).colorScheme.secondary;
   }
 }

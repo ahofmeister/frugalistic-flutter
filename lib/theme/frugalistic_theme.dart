@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 final ThemeData frugalisticTheme = ThemeData.dark().copyWith(
   colorScheme: const ColorScheme.dark(
     primary: Color(0xFFF57D1F),
-    secondary: Color(0xFFC74200),
+    secondary: Colors.purpleAccent,
   ),
   appBarTheme: const AppBarTheme(foregroundColor: Colors.purpleAccent),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(

@@ -1,7 +1,7 @@
 import 'package:frugalistic/category/entity/category_division.dart';
-import 'package:frugalistic/main.dart';
-import 'package:frugalistic/transactions/entity/transaction.dart';
 import 'package:frugalistic/transactions/entity/TransactionType.dart';
+import 'package:frugalistic/transactions/entity/transaction.dart';
+import 'package:frugalistic/transactions/entity/transaction_year_summary.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -23,7 +23,7 @@ class CurrentDate extends _$CurrentDate {
 class Transactions extends _$Transactions {
   @override
   Future<List<Transaction>> build() async {
-    var currentDate = ref.watch(currentDateProvider);
+    var currentDate = ref.read(currentDateProvider);
     List<Map<String, dynamic>> response = await Supabase.instance.client
         .from("transactions")
         .select("id, description, amount, datetime, category(id, name, division) ")
@@ -93,4 +93,11 @@ Future<Map<CategoryDivision, int>> totalExpenseByDivision(TotalExpenseByDivision
   }
 
   return totalExpensesByDivision;
+}
+
+@riverpod
+Future<List<TransactionYearSummary>> toti(TotiRef ref) async {
+  List<Map<String, dynamic>> response =
+      await Supabase.instance.client.rpc("transaction_year_summary2", params: {'year': 2024});
+  return response.map((e) => TransactionYearSummary.fromJson(e)).toList();
 }

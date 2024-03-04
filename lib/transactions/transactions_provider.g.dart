@@ -7,7 +7,7 @@ part of 'transactions_provider.dart';
 // **************************************************************************
 
 String _$totalExpenseAndIncomeAmountHash() =>
-    r'eb5446edb959dbe9b1df18852656cc1fb22e81d5';
+    r'fb348d20c5c973f2f003ca5584d9c0077826a1b7';
 
 /// See also [totalExpenseAndIncomeAmount].
 @ProviderFor(totalExpenseAndIncomeAmount)
@@ -25,7 +25,7 @@ final totalExpenseAndIncomeAmountProvider =
 typedef TotalExpenseAndIncomeAmountRef
     = AutoDisposeFutureProviderRef<ExpenseIncomeTotal>;
 String _$totalExpenseByDivisionHash() =>
-    r'f7fb5a7e0ab56c5b8674de268d06f219399d1d58';
+    r'7011d97619951945d871476b07fb07a3ace2d4ec';
 
 /// See also [totalExpenseByDivision].
 @ProviderFor(totalExpenseByDivision)
@@ -42,6 +42,21 @@ final totalExpenseByDivisionProvider =
 
 typedef TotalExpenseByDivisionRef
     = AutoDisposeFutureProviderRef<Map<CategoryDivision, int>>;
+String _$totiHash() => r'98667c17c562e30004cded0ffe666ea3c9ca0e3f';
+
+/// See also [toti].
+@ProviderFor(toti)
+final totiProvider =
+    AutoDisposeFutureProvider<List<TransactionYearSummary>>.internal(
+  toti,
+  name: r'totiProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$totiHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef TotiRef = AutoDisposeFutureProviderRef<List<TransactionYearSummary>>;
 String _$currentDateHash() => r'6e5e3b2283f893e240d8599b33d1b55a5b87ceed';
 
 /// See also [CurrentDate].
@@ -57,12 +72,12 @@ final currentDateProvider =
 );
 
 typedef _$CurrentDate = AutoDisposeNotifier<Date>;
-String _$transactionsHash() => r'1f2ba021ce0f1262be4c31c6d789128df9ad0984';
+String _$transactionsHash() => r'cea73333f3fa549ecd44337e6e7fc7488b1a0b48';
 
 /// See also [Transactions].
 @ProviderFor(Transactions)
 final transactionsProvider =
-    AutoDisposeAsyncNotifierProvider<Transactions, List<Transaction>>.internal(
+    AsyncNotifierProvider<Transactions, List<Transaction>>.internal(
   Transactions.new,
   name: r'transactionsProvider',
   debugGetCreateSourceHash:
@@ -71,6 +86,6 @@ final transactionsProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$Transactions = AutoDisposeAsyncNotifier<List<Transaction>>;
+typedef _$Transactions = AsyncNotifier<List<Transaction>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
