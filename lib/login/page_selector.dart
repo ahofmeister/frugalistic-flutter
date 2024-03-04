@@ -78,6 +78,7 @@ class CompareMonthScreen extends ConsumerWidget {
     var watch = ref.watch(totiProvider);
 
     return DataTable(
+      dividerThickness: 0.3,
       rows: watch.value!
           .map((e) => DataRow(cells: [
                 DataCell(
@@ -89,9 +90,9 @@ class CompareMonthScreen extends ConsumerWidget {
           .toList(),
       columns: const [
         DataColumn(label: Text("month")),
-        DataColumn(label: Text("income")),
-        DataColumn(label: Text("expense")),
-        DataColumn(label: Text("total")),
+        DataColumn(label: Text("income"), numeric: true),
+        DataColumn(label: Text("expense"), numeric: true),
+        DataColumn(label: Text("total"), numeric: true),
       ],
     );
   }
