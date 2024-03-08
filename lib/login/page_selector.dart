@@ -52,7 +52,7 @@ class PageSelectorState extends State<PageSelector> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.compare_arrows),
-            label: 'Month',
+            label: 'Analysis',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.menu),

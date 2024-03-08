@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frugalistic/version/VersionText.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../login/auth_provider.dart';
@@ -50,22 +51,23 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
     }
 
     return SafeArea(
-      child: Center(
-        child: Column(
-          children: [
-            Text(profile["firstName"].toString()),
-            Text(profile["lastName"].toString()),
-            Center(
-              child: GestureDetector(
-                onTap: () {
-                  ref.watch(authRepositoryProvider).signOut();
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
-                },
-                child: const Text("LOGOUT"),
-              ),
-            ),
-          ],
-        ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Text("${profile["firstName"]} ${profile["lastName"]}"),
+            ],
+          ),
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () {
+              ref.watch(authRepositoryProvider).signOut();
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+            },
+          ),
+          const Expanded(child: VersionText())
+        ],
       ),
     );
   }
