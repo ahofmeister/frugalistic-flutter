@@ -1,11 +1,7 @@
-import 'dart:math';
-import 'dart:ui';
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frugalistic/analysis/analysis_config.dart';
-import 'package:frugalistic/category/provider/categories_provider.dart';
 
 import '../transactions/entity/transaction_category_summary.dart';
 import '../transactions/transactions_provider.dart';
@@ -37,7 +33,6 @@ class MonthExpenseCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var watch = ref.watch(monthOverviewProvider);
-    var categories = ref.watch(categoriesProvider).value!;
 
     var transactionByCategory = ref.watch(transactionsByCategoryProvider);
     return Card(
