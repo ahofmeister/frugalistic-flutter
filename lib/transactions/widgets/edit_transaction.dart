@@ -138,7 +138,7 @@ class _EditTransactionState extends ConsumerState<EditTransaction> {
                   },
                 ),
               ),
-               Text(currentDateTime.toIso8601String()),
+              Text(currentDateTime.toIso8601String()),
               const Icon(Icons.date_range)
             ],
           ),
@@ -220,10 +220,11 @@ class _EditTransactionState extends ConsumerState<EditTransaction> {
                               ref.watch(transactionsProvider.notifier).addTransaction(
                                   type,
                                   Transaction(
+                                      type: type,
                                       description: descriptionController.text,
                                       amount: amountController.intValue,
                                       category: currentCategory!,
-                                      datetime: currentDateTime!.toIso8601String()))
+                                      datetime: currentDateTime.toIso8601String()))
                             }
                         }),
                     child: const Text(

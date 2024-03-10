@@ -58,7 +58,7 @@ class TransactionCard extends StatelessWidget {
             flex: 1,
             child: Align(
               alignment: Alignment.centerRight,
-              child: TransactionAmount(amount: transaction.amount),
+              child: TransactionAmount(amount: transaction.amount, type: transaction.type,),
             ),
           ),
         ],

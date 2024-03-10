@@ -41,7 +41,7 @@ class TransactionDivisions extends ConsumerWidget {
                     color: Colors.black,
                     textStyle: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  Text(division.name.capitalize(), style: TextStyle(fontWeight: FontWeight.bold),),
+                  Text(division.name.capitalize(), style: const TextStyle(fontWeight: FontWeight.bold),),
                 ],
               ),
             );

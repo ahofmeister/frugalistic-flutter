@@ -7,7 +7,7 @@ part of 'transactions_provider.dart';
 // **************************************************************************
 
 String _$totalExpenseAndIncomeAmountHash() =>
-    r'fb348d20c5c973f2f003ca5584d9c0077826a1b7';
+    r'98822edf1c5b6b23ee2d04a51a4defc134273bc6';
 
 /// See also [totalExpenseAndIncomeAmount].
 @ProviderFor(totalExpenseAndIncomeAmount)
@@ -25,7 +25,7 @@ final totalExpenseAndIncomeAmountProvider =
 typedef TotalExpenseAndIncomeAmountRef
     = AutoDisposeFutureProviderRef<ExpenseIncomeTotal>;
 String _$totalExpenseByDivisionHash() =>
-    r'7011d97619951945d871476b07fb07a3ace2d4ec';
+    r'75541e0a35c5a02208d2632493f355d39d566209';
 
 /// See also [totalExpenseByDivision].
 @ProviderFor(totalExpenseByDivision)
@@ -43,7 +43,7 @@ final totalExpenseByDivisionProvider =
 typedef TotalExpenseByDivisionRef
     = AutoDisposeFutureProviderRef<Map<CategoryDivision, int>>;
 String _$transactionsByCategoryHash() =>
-    r'0043dee9a6bbe1ab4c6a5893b6c7358cbd305169';
+    r'56f021cde10168cee6bb61290eb3db791083c6b0';
 
 /// See also [transactionsByCategory].
 @ProviderFor(transactionsByCategory)
@@ -60,21 +60,24 @@ final transactionsByCategoryProvider =
 
 typedef TransactionsByCategoryRef
     = FutureProviderRef<List<TransactionCategorySummary>>;
-String _$totiHash() => r'98667c17c562e30004cded0ffe666ea3c9ca0e3f';
+String _$transactionYearSummaryHash() =>
+    r'11042f10dd47bf6deb7cc34bae526adc7509f3b3';
 
-/// See also [toti].
-@ProviderFor(toti)
-final totiProvider =
+/// See also [transactionYearSummary].
+@ProviderFor(transactionYearSummary)
+final transactionYearSummaryProvider =
     AutoDisposeFutureProvider<List<TransactionYearSummary>>.internal(
-  toti,
-  name: r'totiProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$totiHash,
+  transactionYearSummary,
+  name: r'transactionYearSummaryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$transactionYearSummaryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef TotiRef = AutoDisposeFutureProviderRef<List<TransactionYearSummary>>;
+typedef TransactionYearSummaryRef
+    = AutoDisposeFutureProviderRef<List<TransactionYearSummary>>;
 String _$currentDateHash() => r'd3a98e300bc1390c14a24ac9438fa5af845319b9';
 
 /// See also [CurrentDate].
@@ -89,7 +92,7 @@ final currentDateProvider = NotifierProvider<CurrentDate, Date>.internal(
 );
 
 typedef _$CurrentDate = Notifier<Date>;
-String _$transactionsHash() => r'6dd258012d1f4e3a8a0bbebb059be2173b8c0da9';
+String _$transactionsHash() => r'8db77a8f5cfce6957d20d11a47dd78bda53a90fa';
 
 /// See also [Transactions].
 @ProviderFor(Transactions)

@@ -10,14 +10,16 @@ _$TransactionYearSummaryImpl _$$TransactionYearSummaryImplFromJson(
         Map<String, dynamic> json) =>
     _$TransactionYearSummaryImpl(
       month: json['month'] as int,
-      income: json['income'] as int,
-      expense: json['expense'] as int,
+      incomes: json['incomes'] as int,
+      expenses: json['expenses'] as int,
+      savings: json['savings'] as int,
     );
 
 Map<String, dynamic> _$$TransactionYearSummaryImplToJson(
         _$TransactionYearSummaryImpl instance) =>
     <String, dynamic>{
       'month': instance.month,
-      'income': instance.income,
-      'expense': instance.expense,
+      'incomes': instance.incomes,
+      'expenses': instance.expenses,
+      'savings': instance.savings,
     };

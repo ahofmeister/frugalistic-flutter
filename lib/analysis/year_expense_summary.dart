@@ -13,7 +13,7 @@ class YearSummary extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var watch = ref.watch(totiProvider);
+    var watch = ref.watch(transactionYearSummaryProvider);
 
     switch (watch) {
       case AsyncData(:final value):
@@ -38,7 +38,7 @@ class YearSummary extends ConsumerWidget {
                       width: double.infinity,
                       child: BarChart(
                         BarChartData(
-                          maxY: findMax(value),
+                          maxY: findMaxAmount(value),
                           titlesData: const FlTitlesData(
                             leftTitles: AxisTitles(),
                             topTitles: AxisTitles(),
@@ -48,11 +48,14 @@ class YearSummary extends ConsumerWidget {
                           barGroups: value.map((element) {
                             return BarChartGroupData(x: element.month, barRods: [
                               BarChartRodData(
-                                  toY: (element.income.toDouble() / 100),
+                                  toY: (element.incomes.toDouble() / 100),
                                   color: Theme.of(context).colorScheme.income),
                               BarChartRodData(
-                                  toY: (element.expense.toDouble() / 100) * -1,
+                                  toY: (element.expenses.toDouble() / 100) * -1,
                                   color: Theme.of(context).colorScheme.expense),
+                              BarChartRodData(
+                                  toY: (element.savings.toDouble() / 100) * -1,
+                                  color: Theme.of(context).colorScheme.saving),
                             ]);
                           }).toList(),
                         ),
@@ -99,20 +102,28 @@ class YearSummary extends ConsumerWidget {
     }
   }
 
-  double findMax(List<TransactionYearSummary> yearSummaries) {
-    int maxIncome = yearSummaries.fold(0, (total, current) => max(total, current.income));
-    int maxExpense = yearSummaries.fold(0, (total, current) => max(total, -current.expense));
+  double findMaxAmount(List<TransactionYearSummary> yearSummaries) {
+    double maxIncome = findMax(yearSummaries, (summary) => summary.incomes);
+    double maxExpense = findMax(yearSummaries, (summary) => -summary.expenses);
+    double maxSaving = findMax(yearSummaries, (summary) => summary.savings);
 
-    int maxPropertyValue = max(maxIncome, maxExpense);
+    double maxPropertyValue = max(max(maxIncome, maxExpense), maxSaving);
 
-    return roundToNext500(maxPropertyValue / 100).toDouble();
+    return roundToNext(maxPropertyValue, 500).toDouble() / 100;
   }
 
-  double roundToNext500(double value) {
-    double remainder = value % 500;
+  double findMax(List<TransactionYearSummary> yearSummaries,
+      int Function(TransactionYearSummary) propertySelector) {
+    return yearSummaries
+        .fold(0, (total, current) => max(total, propertySelector(current)))
+        .toDouble();
+  }
+
+  double roundToNext(double value, double next) {
+    double remainder = value % next;
     if (remainder == 0) {
       return value;
     }
-    return value + (500 - remainder);
+    return value + (next - remainder);
   }
 }

@@ -56,6 +56,8 @@ extension MyColorScheme on ColorScheme {
 
   Color get expense => const Color(0xFFF58484);
 
+  Color get saving => const Color(0xFFe9c46a);
+
   Color get primary => const Color(0xFFD85311);
 
   Color get neutral => const Color(0xFF101112);

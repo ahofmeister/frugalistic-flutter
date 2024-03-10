@@ -37,7 +37,8 @@ class TransactionList extends ConsumerWidget {
                 ),
               ),
               onDismissed: (direction) {
-                ref.read(transactionsProvider.notifier).removeTransaction(value[index]);
+                // TODO
+                // ref.read(transactionsProvider.notifier).removeTransaction(value[index]);
               },
               child: TransactionCard(transaction: value[index]),
             ),

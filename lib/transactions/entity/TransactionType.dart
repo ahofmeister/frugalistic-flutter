@@ -1,4 +1,5 @@
 enum TransactionType {
   expense,
-  income;
+  income,
+  savings
 }

@@ -24,6 +24,7 @@ mixin _$Transaction {
   String get description => throw _privateConstructorUsedError;
   int get amount => throw _privateConstructorUsedError;
   String get datetime => throw _privateConstructorUsedError;
+  TransactionType get type => throw _privateConstructorUsedError;
   Category get category => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,6 +44,7 @@ abstract class $TransactionCopyWith<$Res> {
       String description,
       int amount,
       String datetime,
+      TransactionType type,
       Category category});
 
   $CategoryCopyWith<$Res> get category;
@@ -65,6 +67,7 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
     Object? description = null,
     Object? amount = null,
     Object? datetime = null,
+    Object? type = null,
     Object? category = null,
   }) {
     return _then(_value.copyWith(
@@ -84,6 +87,10 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
           ? _value.datetime
           : datetime // ignore: cast_nullable_to_non_nullable
               as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as TransactionType,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -113,6 +120,7 @@ abstract class _$$TransactionImplCopyWith<$Res>
       String description,
       int amount,
       String datetime,
+      TransactionType type,
       Category category});
 
   @override
@@ -134,6 +142,7 @@ class __$$TransactionImplCopyWithImpl<$Res>
     Object? description = null,
     Object? amount = null,
     Object? datetime = null,
+    Object? type = null,
     Object? category = null,
   }) {
     return _then(_$TransactionImpl(
@@ -153,6 +162,10 @@ class __$$TransactionImplCopyWithImpl<$Res>
           ? _value.datetime
           : datetime // ignore: cast_nullable_to_non_nullable
               as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as TransactionType,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -169,6 +182,7 @@ class _$TransactionImpl implements _Transaction {
       required this.description,
       required this.amount,
       required this.datetime,
+      required this.type,
       required this.category});
 
   factory _$TransactionImpl.fromJson(Map<String, dynamic> json) =>
@@ -183,11 +197,13 @@ class _$TransactionImpl implements _Transaction {
   @override
   final String datetime;
   @override
+  final TransactionType type;
+  @override
   final Category category;
 
   @override
   String toString() {
-    return 'Transaction(id: $id, description: $description, amount: $amount, datetime: $datetime, category: $category)';
+    return 'Transaction(id: $id, description: $description, amount: $amount, datetime: $datetime, type: $type, category: $category)';
   }
 
   @override
@@ -201,14 +217,15 @@ class _$TransactionImpl implements _Transaction {
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.datetime, datetime) ||
                 other.datetime == datetime) &&
+            (identical(other.type, type) || other.type == type) &&
             (identical(other.category, category) ||
                 other.category == category));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, description, amount, datetime, category);
+  int get hashCode => Object.hash(
+      runtimeType, id, description, amount, datetime, type, category);
 
   @JsonKey(ignore: true)
   @override
@@ -230,6 +247,7 @@ abstract class _Transaction implements Transaction {
       required final String description,
       required final int amount,
       required final String datetime,
+      required final TransactionType type,
       required final Category category}) = _$TransactionImpl;
 
   factory _Transaction.fromJson(Map<String, dynamic> json) =
@@ -243,6 +261,8 @@ abstract class _Transaction implements Transaction {
   int get amount;
   @override
   String get datetime;
+  @override
+  TransactionType get type;
   @override
   Category get category;
   @override

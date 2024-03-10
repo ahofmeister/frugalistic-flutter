@@ -27,7 +27,7 @@ class Transactions extends _$Transactions {
     var currentDate = ref.watch(currentDateProvider);
     List<Map<String, dynamic>> response = await Supabase.instance.client
         .from("transactions")
-        .select("id, description, amount, datetime, category(id, name, division) ")
+        .select("id, description, amount, datetime, type, category(id, name, division)")
         .gte('datetime', currentDate.firstOfMonth().toString())
         .lte('datetime', currentDate.lastOfMonth().toString())
         .order('datetime', ascending: false)
@@ -43,7 +43,8 @@ class Transactions extends _$Transactions {
       "amount": type == TransactionType.income
           ? (transaction.amount).toInt()
           : -(transaction.amount).toInt(),
-      "category": transaction.category.id
+      "category": transaction.category.id,
+      "type": type.name
     });
     ref.invalidateSelf();
   }
@@ -57,8 +58,9 @@ class Transactions extends _$Transactions {
 class ExpenseIncomeTotal {
   int expense;
   int income;
+  int saving;
 
-  ExpenseIncomeTotal({required this.expense, required this.income});
+  ExpenseIncomeTotal({required this.expense, required this.income, required this.saving});
 }
 
 @riverpod
@@ -66,11 +68,16 @@ Future<ExpenseIncomeTotal> totalExpenseAndIncomeAmount(TotalExpenseAndIncomeAmou
   List<Transaction> list = await ref.watch(transactionsProvider.future);
 
   ExpenseIncomeTotal result =
-      list.fold(ExpenseIncomeTotal(expense: 0, income: 0), (acc, transaction) {
-    if (transaction.amount < 0) {
-      acc.expense += transaction.amount;
-    } else {
+      list.fold(ExpenseIncomeTotal(expense: 0, income: 0, saving: 0), (acc, transaction) {
+    if (transaction.type == TransactionType.income) {
       acc.income += transaction.amount;
+    }
+    if (transaction.type == TransactionType.expense) {
+      acc.expense += transaction.amount;
+    }
+
+    if (transaction.type == TransactionType.savings) {
+      acc.saving += transaction.amount;
     }
     return acc;
   });
@@ -80,11 +87,11 @@ Future<ExpenseIncomeTotal> totalExpenseAndIncomeAmount(TotalExpenseAndIncomeAmou
 
 @riverpod
 Future<Map<CategoryDivision, int>> totalExpenseByDivision(TotalExpenseByDivisionRef ref) async {
-  List<Transaction> list = await ref.watch(transactionsProvider.future);
+  return groupByDivisions(await ref.watch(transactionsProvider.future));
+}
 
-  Map<CategoryDivision, int> totalExpensesByDivision = {
-    for (var division in CategoryDivision.values) division: 0
-  };
+Map<CategoryDivision, int> groupByDivisions(List<Transaction> list) {
+  Map<CategoryDivision, int> totalExpensesByDivision = {};
 
   for (Transaction transaction in list) {
     if (transaction.amount < 0) {
@@ -98,17 +105,19 @@ Future<Map<CategoryDivision, int>> totalExpenseByDivision(TotalExpenseByDivision
 }
 
 @Riverpod(keepAlive: true)
-Future<List<TransactionCategorySummary>> transactionsByCategory(TransactionsByCategoryRef ref) async {
-  List<Map<String, dynamic>> response = await Supabase.instance.client.rpc(
-      "transactions_by_category",
-      params: {'datefrom': "2024-03-01", 'dateto': "2024-03-31"});
+Future<List<TransactionCategorySummary>> transactionsByCategory(
+    TransactionsByCategoryRef ref) async {
+  List<Map<String, dynamic>> response = await Supabase.instance.client
+      .rpc("transactions_by_category", params: {'datefrom': "2024-03-01", 'dateto': "2024-03-31"});
   return response.map((e) => TransactionCategorySummary.fromJson(e)).toList();
 }
 
-
 @riverpod
-Future<List<TransactionYearSummary>> toti(TotiRef ref) async {
+Future<List<TransactionYearSummary>> transactionYearSummary(TransactionYearSummaryRef ref) async {
   List<Map<String, dynamic>> response =
-      await Supabase.instance.client.rpc("transaction_year_summary2", params: {'year': 2024});
+      await Supabase.instance.client.rpc("transaction_year_summary", params: {'year': 2024});
+
+  print(response);
+
   return response.map((e) => TransactionYearSummary.fromJson(e)).toList();
 }

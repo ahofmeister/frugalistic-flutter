@@ -22,8 +22,9 @@ TransactionYearSummary _$TransactionYearSummaryFromJson(
 /// @nodoc
 mixin _$TransactionYearSummary {
   int get month => throw _privateConstructorUsedError;
-  int get income => throw _privateConstructorUsedError;
-  int get expense => throw _privateConstructorUsedError;
+  int get incomes => throw _privateConstructorUsedError;
+  int get expenses => throw _privateConstructorUsedError;
+  int get savings => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +38,7 @@ abstract class $TransactionYearSummaryCopyWith<$Res> {
           $Res Function(TransactionYearSummary) then) =
       _$TransactionYearSummaryCopyWithImpl<$Res, TransactionYearSummary>;
   @useResult
-  $Res call({int month, int income, int expense});
+  $Res call({int month, int incomes, int expenses, int savings});
 }
 
 /// @nodoc
@@ -55,21 +56,26 @@ class _$TransactionYearSummaryCopyWithImpl<$Res,
   @override
   $Res call({
     Object? month = null,
-    Object? income = null,
-    Object? expense = null,
+    Object? incomes = null,
+    Object? expenses = null,
+    Object? savings = null,
   }) {
     return _then(_value.copyWith(
       month: null == month
           ? _value.month
           : month // ignore: cast_nullable_to_non_nullable
               as int,
-      income: null == income
-          ? _value.income
-          : income // ignore: cast_nullable_to_non_nullable
+      incomes: null == incomes
+          ? _value.incomes
+          : incomes // ignore: cast_nullable_to_non_nullable
               as int,
-      expense: null == expense
-          ? _value.expense
-          : expense // ignore: cast_nullable_to_non_nullable
+      expenses: null == expenses
+          ? _value.expenses
+          : expenses // ignore: cast_nullable_to_non_nullable
+              as int,
+      savings: null == savings
+          ? _value.savings
+          : savings // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -84,7 +90,7 @@ abstract class _$$TransactionYearSummaryImplCopyWith<$Res>
       __$$TransactionYearSummaryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int month, int income, int expense});
+  $Res call({int month, int incomes, int expenses, int savings});
 }
 
 /// @nodoc
@@ -101,21 +107,26 @@ class __$$TransactionYearSummaryImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? month = null,
-    Object? income = null,
-    Object? expense = null,
+    Object? incomes = null,
+    Object? expenses = null,
+    Object? savings = null,
   }) {
     return _then(_$TransactionYearSummaryImpl(
       month: null == month
           ? _value.month
           : month // ignore: cast_nullable_to_non_nullable
               as int,
-      income: null == income
-          ? _value.income
-          : income // ignore: cast_nullable_to_non_nullable
+      incomes: null == incomes
+          ? _value.incomes
+          : incomes // ignore: cast_nullable_to_non_nullable
               as int,
-      expense: null == expense
-          ? _value.expense
-          : expense // ignore: cast_nullable_to_non_nullable
+      expenses: null == expenses
+          ? _value.expenses
+          : expenses // ignore: cast_nullable_to_non_nullable
+              as int,
+      savings: null == savings
+          ? _value.savings
+          : savings // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -125,7 +136,10 @@ class __$$TransactionYearSummaryImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TransactionYearSummaryImpl implements _TransactionYearSummary {
   _$TransactionYearSummaryImpl(
-      {required this.month, required this.income, required this.expense});
+      {required this.month,
+      required this.incomes,
+      required this.expenses,
+      required this.savings});
 
   factory _$TransactionYearSummaryImpl.fromJson(Map<String, dynamic> json) =>
       _$$TransactionYearSummaryImplFromJson(json);
@@ -133,13 +147,15 @@ class _$TransactionYearSummaryImpl implements _TransactionYearSummary {
   @override
   final int month;
   @override
-  final int income;
+  final int incomes;
   @override
-  final int expense;
+  final int expenses;
+  @override
+  final int savings;
 
   @override
   String toString() {
-    return 'TransactionYearSummary(month: $month, income: $income, expense: $expense)';
+    return 'TransactionYearSummary(month: $month, incomes: $incomes, expenses: $expenses, savings: $savings)';
   }
 
   @override
@@ -148,13 +164,16 @@ class _$TransactionYearSummaryImpl implements _TransactionYearSummary {
         (other.runtimeType == runtimeType &&
             other is _$TransactionYearSummaryImpl &&
             (identical(other.month, month) || other.month == month) &&
-            (identical(other.income, income) || other.income == income) &&
-            (identical(other.expense, expense) || other.expense == expense));
+            (identical(other.incomes, incomes) || other.incomes == incomes) &&
+            (identical(other.expenses, expenses) ||
+                other.expenses == expenses) &&
+            (identical(other.savings, savings) || other.savings == savings));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, month, income, expense);
+  int get hashCode =>
+      Object.hash(runtimeType, month, incomes, expenses, savings);
 
   @JsonKey(ignore: true)
   @override
@@ -174,8 +193,9 @@ class _$TransactionYearSummaryImpl implements _TransactionYearSummary {
 abstract class _TransactionYearSummary implements TransactionYearSummary {
   factory _TransactionYearSummary(
       {required final int month,
-      required final int income,
-      required final int expense}) = _$TransactionYearSummaryImpl;
+      required final int incomes,
+      required final int expenses,
+      required final int savings}) = _$TransactionYearSummaryImpl;
 
   factory _TransactionYearSummary.fromJson(Map<String, dynamic> json) =
       _$TransactionYearSummaryImpl.fromJson;
@@ -183,9 +203,11 @@ abstract class _TransactionYearSummary implements TransactionYearSummary {
   @override
   int get month;
   @override
-  int get income;
+  int get incomes;
   @override
-  int get expense;
+  int get expenses;
+  @override
+  int get savings;
   @override
   @JsonKey(ignore: true)
   _$$TransactionYearSummaryImplCopyWith<_$TransactionYearSummaryImpl>
