@@ -25,12 +25,12 @@ final totalExpenseAndIncomeAmountProvider =
 typedef TotalExpenseAndIncomeAmountRef
     = AutoDisposeFutureProviderRef<ExpenseIncomeTotal>;
 String _$totalExpenseByDivisionHash() =>
-    r'75541e0a35c5a02208d2632493f355d39d566209';
+    r'29b74e14908a78006c5db8f3fa2457d62b072055';
 
 /// See also [totalExpenseByDivision].
 @ProviderFor(totalExpenseByDivision)
 final totalExpenseByDivisionProvider =
-    AutoDisposeFutureProvider<Map<CategoryDivision, int>>.internal(
+    FutureProvider<Map<CategoryDivision, int>>.internal(
   totalExpenseByDivision,
   name: r'totalExpenseByDivisionProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -41,7 +41,7 @@ final totalExpenseByDivisionProvider =
 );
 
 typedef TotalExpenseByDivisionRef
-    = AutoDisposeFutureProviderRef<Map<CategoryDivision, int>>;
+    = FutureProviderRef<Map<CategoryDivision, int>>;
 String _$transactionsByCategoryHash() =>
     r'56f021cde10168cee6bb61290eb3db791083c6b0';
 
@@ -61,12 +61,12 @@ final transactionsByCategoryProvider =
 typedef TransactionsByCategoryRef
     = FutureProviderRef<List<TransactionCategorySummary>>;
 String _$transactionYearSummaryHash() =>
-    r'11042f10dd47bf6deb7cc34bae526adc7509f3b3';
+    r'a1999f85c923f0b386f103bda928b598041a16ef';
 
 /// See also [transactionYearSummary].
 @ProviderFor(transactionYearSummary)
 final transactionYearSummaryProvider =
-    AutoDisposeFutureProvider<List<TransactionYearSummary>>.internal(
+    FutureProvider<List<TransactionYearSummary>>.internal(
   transactionYearSummary,
   name: r'transactionYearSummaryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -77,7 +77,7 @@ final transactionYearSummaryProvider =
 );
 
 typedef TransactionYearSummaryRef
-    = AutoDisposeFutureProviderRef<List<TransactionYearSummary>>;
+    = FutureProviderRef<List<TransactionYearSummary>>;
 String _$currentDateHash() => r'd3a98e300bc1390c14a24ac9438fa5af845319b9';
 
 /// See also [CurrentDate].

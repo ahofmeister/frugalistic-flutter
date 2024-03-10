@@ -85,7 +85,7 @@ Future<ExpenseIncomeTotal> totalExpenseAndIncomeAmount(TotalExpenseAndIncomeAmou
   return result;
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<Map<CategoryDivision, int>> totalExpenseByDivision(TotalExpenseByDivisionRef ref) async {
   return groupByDivisions(await ref.watch(transactionsProvider.future));
 }
@@ -112,7 +112,7 @@ Future<List<TransactionCategorySummary>> transactionsByCategory(
   return response.map((e) => TransactionCategorySummary.fromJson(e)).toList();
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<List<TransactionYearSummary>> transactionYearSummary(TransactionYearSummaryRef ref) async {
   List<Map<String, dynamic>> response =
       await Supabase.instance.client.rpc("transaction_year_summary", params: {'year': 2024});

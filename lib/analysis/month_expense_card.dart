@@ -4,6 +4,8 @@ import 'dart:ui';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frugalistic/analysis/analysis_config.dart';
+import 'package:frugalistic/category/provider/categories_provider.dart';
 
 import '../transactions/entity/transaction_category_summary.dart';
 import '../transactions/transactions_provider.dart';
@@ -13,16 +15,30 @@ class MonthExpenseCard extends ConsumerWidget {
   const MonthExpenseCard({super.key});
 
   List<PieChartSectionData> showingSections(List<TransactionCategorySummary> value) {
+    late List<Color> colors = [
+      Colors.blueGrey,
+      Colors.red,
+      Colors.blue,
+      Colors.white,
+      Colors.purpleAccent,
+      Colors.yellow,
+      Colors.greenAccent,
+      Colors.orange,
+      Colors.white
+    ];
     return value
-        .map((e) => PieChartSectionData(
-            title: '',
-            color: Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0),
-            value: e.total.toDouble()))
+        .asMap()
+        .entries
+        .map((entry) => PieChartSectionData(
+            title: '', color: colors[entry.key], value: entry.value.total.abs().toDouble()))
         .toList();
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var watch = ref.watch(monthOverviewProvider);
+    var categories = ref.watch(categoriesProvider).value!;
+
     var transactionByCategory = ref.watch(transactionsByCategoryProvider);
     return Card(
       child: Column(
@@ -47,17 +63,38 @@ class MonthExpenseCard extends ConsumerWidget {
                     width: 200,
                     child: PieChart(
                       PieChartData(
+                          pieTouchData:
+                              PieTouchData(touchCallback: (FlTouchEvent event, pieTouchResponse) {
+                            if (!event.isInterestedForInteractions ||
+                                pieTouchResponse == null ||
+                                pieTouchResponse.touchedSection == null) {
+                              return;
+                            }
+                            ref.watch(monthOverviewProvider.notifier).state =
+                                (pieTouchResponse.touchedSection!.touchedSectionIndex);
+                          }),
                           sections: showingSections(transactionByCategory.value!),
-                          sectionsSpace: 5,
+                          sectionsSpace: 0,
                           centerSpaceRadius: 90,
-                          centerSpaceColor: Colors.black),
+                          centerSpaceColor: Colors.grey),
                     ),
                   ),
-                  TransactionAmount(
-                      textStyle: const TextStyle(fontWeight: FontWeight.bold),
-                      amount: transactionByCategory.value!
-                          .map((e) => e.total)
-                          .reduce((value, element) => value + element))
+                  if (watch != -1)
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(watch == -1 ? '' : transactionByCategory.value![watch].name),
+                        TransactionAmount(
+                          amount: transactionByCategory.value![watch].total,
+                          textStyle: TextStyle(fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                  // TransactionAmount(
+                  //     textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                  //     amount: transactionByCategory.value!
+                  //         .map((e) => e.total)
+                  //         .reduce((value, element) => value + element))
                 ],
               ),
             ),
