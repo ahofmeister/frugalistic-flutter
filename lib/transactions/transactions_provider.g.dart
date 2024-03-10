@@ -42,6 +42,24 @@ final totalExpenseByDivisionProvider =
 
 typedef TotalExpenseByDivisionRef
     = AutoDisposeFutureProviderRef<Map<CategoryDivision, int>>;
+String _$transactionsByCategoryHash() =>
+    r'0043dee9a6bbe1ab4c6a5893b6c7358cbd305169';
+
+/// See also [transactionsByCategory].
+@ProviderFor(transactionsByCategory)
+final transactionsByCategoryProvider =
+    FutureProvider<List<TransactionCategorySummary>>.internal(
+  transactionsByCategory,
+  name: r'transactionsByCategoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$transactionsByCategoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef TransactionsByCategoryRef
+    = FutureProviderRef<List<TransactionCategorySummary>>;
 String _$totiHash() => r'98667c17c562e30004cded0ffe666ea3c9ca0e3f';
 
 /// See also [toti].
@@ -57,12 +75,11 @@ final totiProvider =
 );
 
 typedef TotiRef = AutoDisposeFutureProviderRef<List<TransactionYearSummary>>;
-String _$currentDateHash() => r'6e5e3b2283f893e240d8599b33d1b55a5b87ceed';
+String _$currentDateHash() => r'd3a98e300bc1390c14a24ac9438fa5af845319b9';
 
 /// See also [CurrentDate].
 @ProviderFor(CurrentDate)
-final currentDateProvider =
-    AutoDisposeNotifierProvider<CurrentDate, Date>.internal(
+final currentDateProvider = NotifierProvider<CurrentDate, Date>.internal(
   CurrentDate.new,
   name: r'currentDateProvider',
   debugGetCreateSourceHash:
@@ -71,8 +88,8 @@ final currentDateProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$CurrentDate = AutoDisposeNotifier<Date>;
-String _$transactionsHash() => r'cea73333f3fa549ecd44337e6e7fc7488b1a0b48';
+typedef _$CurrentDate = Notifier<Date>;
+String _$transactionsHash() => r'6dd258012d1f4e3a8a0bbebb059be2173b8c0da9';
 
 /// See also [Transactions].
 @ProviderFor(Transactions)

@@ -36,8 +36,12 @@ class TransactionDivisions extends ConsumerWidget {
               ),
               child: Column(
                 children: [
-                  TransactionAmount(amount: amount, color: Theme.of(context).primaryColor,),
-                  Text(division.name.capitalize()),
+                  TransactionAmount(
+                    amount: amount,
+                    color: Colors.black,
+                    textStyle: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(division.name.capitalize(), style: TextStyle(fontWeight: FontWeight.bold),),
                 ],
               ),
             );
